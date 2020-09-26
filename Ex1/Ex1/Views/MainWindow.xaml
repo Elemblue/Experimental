@@ -6,8 +6,12 @@
         xmlns:local="clr-namespace:Ex1"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Grid/>
+    
+    
+    <StackPanel Orientation="Horizontal" Height="auto" VerticalAlignment="Top">
+            <Label>Customer name:</Label>
+            <TextBox Text="{Binding Customer.Name, UpdateSourceTrigger=PropertyChanged}" Width="136"/> 
+            <Button Command="{Binding UpdateCommand}">Update</Button> <!--This looks for a command under ICommand in the ViewModel-->
+        </StackPanel>
 
-    </Grid>
 </Window>
