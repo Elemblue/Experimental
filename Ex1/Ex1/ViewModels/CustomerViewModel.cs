@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Ex1;
+using Autofac;
 
 namespace Ex1.ViewModels
 {
@@ -30,7 +32,17 @@ namespace Ex1.ViewModels
         /// Initializes a new instance of the CustomerViewModel class
         /// </summary>
         public CustomerViewModel() {
-            Customer = new Customer("David");
+
+            //Dependancy injection example. This is incorrect, just a quick ex.
+            var container = ContainerConfig.Configure();
+
+            using (var scope = container.BeginLifetimeScope())
+            {
+                var app = scope.Resolve<ICustomer>();   //This is a manual call. If you do this alot, your app is inefficient. Should only be at the start. 
+            }
+        }
+
+        Customer = new Customer("David");
             UpdateCommand = new CustomerUpdateCommand(this); //Passes in itself for the customerUpdateCommand class to deal with.
         }
 
